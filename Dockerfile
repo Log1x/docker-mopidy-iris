@@ -6,15 +6,14 @@ WORKDIR /mopidy-iris
 
 RUN \
   echo "* Installing Runtime Packages" \
-    && echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk add --no-cache \
-      libvpx-dev \
+      libvpx \
       gst-plugins-good \
       gst-plugins-ugly \
       py2-gst \
       su-exec \
-      tini@commuedge \
-    && pip instatall -U \
+      tini \
+    && pip install -U \
       pyopenssl \
       youtube-dl \
   && echo "* Installing Mopidy + Extensions" \
