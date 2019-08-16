@@ -1,5 +1,9 @@
 # Mopidy + Iris Alpine Docker Image
 
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/log1x/mopidy-iris?style=flat-square)
+![Docker Pulls](https://img.shields.io/docker/pulls/log1x/mopidy-iris?style=flat-square)
+![Docker Stars](https://img.shields.io/docker/stars/log1x/mopidy-iris?style=flat-square)
+
 [Iris](https://github.com/jaedb/Iris) (formerly known as Spotmop) is an extension for the Mopidy music server. With support for Spotify, LastFM, Snapcast, Icecast and many other extensions, Iris is the software that brings all your music into one user-friendly and unified interface.
 
 ## Usage
@@ -16,7 +20,7 @@ $ docker run -d \
   log1x/mopidy-iris
 ```
 
-**Iris (Web UI):** `http://<host>:6680`
+- **Iris (Web UI):** `http://<host>:6680`
 
 ## Bug Reports
 
