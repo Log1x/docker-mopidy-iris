@@ -8,10 +8,11 @@ RUN \
   echo "* Installing Runtime Packages" \
     && echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && apk add --no-cache \
+      libvpx \
       gst-plugins-good@commuedge \
       gst-plugins-ugly@commuedge \
       py2-gst@commuedge \
-      su-exec@commuedge \
+      su-exec \
       tini@commuedge \
     && pip instatall -U \
       pyopenssl \
