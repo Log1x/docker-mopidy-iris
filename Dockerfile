@@ -11,7 +11,7 @@ RUN \
     && apk add --no-cache \
       libvpx@edge \
       gst-plugins-good@commuedge \
-      gst-plugins-ugl@commuedge \
+      gst-plugins-ugly@commuedge \
       py2-gst@commuedge \
       su-exec@edge \
       tini@commuedge \
