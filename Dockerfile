@@ -1,7 +1,6 @@
 FROM jfloff/alpine-python:2.7
 MAINTAINER Log1x <github@log1x.com>
 
-USER mopidy
 ENV PGID=1000 PUID=1000
 WORKDIR /mopidy-iris
 
@@ -35,6 +34,7 @@ RUN \
   && echo "* Ready to start Mopidy" \
   && sleep 10
 
+USER   mopidy
 COPY   mopidy.conf /config/mopidy.conf
 COPY   run.sh /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/run.sh

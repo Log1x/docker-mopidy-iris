@@ -13,7 +13,7 @@ $ docker run -d \
   -v <path for data files>:/data \
   -v <path for music files>:/music \
   -v <path for playlist files>:/playlists \
-	log1x/mopidy-iris
+  log1x/mopidy-iris
 ```
 
 **Iris (Web UI):** `http://<host>:6680`
