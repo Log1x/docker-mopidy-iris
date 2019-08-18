@@ -1,6 +1,6 @@
 #!/bin/sh
 function stop() {
-    kill $PID
+  kill $PID
 }
 
 trap stop HUP INT TERM

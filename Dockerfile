@@ -36,12 +36,6 @@ RUN \
       Mopidy-Local-SQLite \
   && echo "* Installing Iris" \
     && pip install -U Mopidy-Iris \
-  && echo "* Creating Mopidy User" \
-    && addgroup -g ${PGID} mopidy \
-    && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
-  && echo "* Fixing privileges" \
-    && mkdir -p /data \
-    && chown -R mopidy:mopidy /data \
   && echo "* Ready to start Mopidy" \
   && sleep 10
 
@@ -49,9 +43,8 @@ COPY   mopidy.conf /config/mopidy.conf
 COPY   run.sh /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/run.sh
 EXPOSE 6600 6680 5555/udp
-USER   mopidy
 VOLUME ["/music", "/data"]
 
 LABEL description "Open source media server"
 
-CMD ["/sbin/tini", "--", "run.sh"]
+CMD ["/sbin/tini", "--", "mopidy --config '/data/config/mopidy.conf'"]
