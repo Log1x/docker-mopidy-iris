@@ -6,7 +6,7 @@ ENV PGID="${PGID:-1000}"
 
 ENV PYTHONPATH="/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
 
-WORKDIR /mopidy-iris
+WORKDIR /mopidy
 
 RUN \
   echo "* Updating Package Repositories" \
@@ -42,14 +42,15 @@ RUN \
   && echo "* Fixing privileges" \
     && mkdir -p /data/.config /data/.cache \
     && chown -R mopidy:mopidy /data \
+  && echo "* Cleaning up" \
+    && rm -f /var/cache/apk/* \
   && echo "* Ready to start Mopidy" \
   && sleep 1
 
-EXPOSE 6600 6680 5555/UDP
-VOLUME /data /music
-
-COPY root/ /
-RUN  chmod +x /usr/local/bin/run.sh
+COPY   root/ /
+RUN    chmod +x /usr/local/bin/run.sh
+EXPOSE 6600 6680 5555/udp
+VOLUME /data /music /playlists
 
 LABEL description "Open source media server"
 
