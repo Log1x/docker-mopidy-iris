@@ -26,7 +26,6 @@ RUN \
       py2-gst@edge \
       py-gobject@edge \
       su-exec \
-      gstreamer-tools@edge \
       gst-plugins-good@edge \
       gst-plugins-ugly@edge \
     && pip install -U \
@@ -41,12 +40,12 @@ RUN \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
   && echo "* Fixing privileges" \
-    && mkdir -p /data \
+    && mkdir -p /data/.config /data/.cache \
     && chown -R mopidy:mopidy /data \
   && echo "* Ready to start Mopidy" \
   && sleep 1
 
-COPY   mopidy.conf /data/config/mopidy.conf
+COPY   mopidy.conf /data/.config/mopidy.conf
 COPY   run.sh /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/run.sh
 EXPOSE 6600 6680 5555/udp
