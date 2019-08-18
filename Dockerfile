@@ -30,12 +30,11 @@ RUN \
   && echo "* Installing Mopidy + Extensions" \
     && pip install -U \
       Mopidy \
+      Mopidy-Iris \
       Mopidy-SoundCloud \
       Mopidy-YouTube \
       Mopidy-Local-Images \
       Mopidy-Local-SQLite \
-  && echo "* Installing Iris" \
-    && pip install -U Mopidy-Iris \
   && echo "* Ready to start Mopidy" \
   && sleep 10
 
