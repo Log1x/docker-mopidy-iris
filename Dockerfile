@@ -20,8 +20,11 @@ RUN \
       openssl-dev \
       v4l-utils-libs@edge \
       py2-gst@edge \
+      py-gst@edge \
       su-exec \
-      tini@edge \
+      gstreamer@edge \
+      gstreamer-tools@edge \
+      gst-plugins-base@edge \
       gst-plugins-good@edge \
       gst-plugins-ugly@edge \
     && pip install -U \
