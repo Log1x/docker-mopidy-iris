@@ -5,6 +5,6 @@ function stop() {
 }
 
 trap stop HUP INT TERM
-su-exec mopidy mopidy --config "${MOPIDY_CONFIG_FILE}" "${@}" &
+su-exec mopidy mopidy --config "/data/config/mopidy.conf" "${@}" &
 PID=$!
 wait $PID
