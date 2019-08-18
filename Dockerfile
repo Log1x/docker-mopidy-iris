@@ -8,6 +8,7 @@ RUN \
   echo "* Installing Runtime Packages" \
     && apk add --no-cache \
       libvpx \
+      libcdio \
       gst-plugins-good \
       gst-plugins-ugly \
       py2-gst \
