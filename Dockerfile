@@ -5,18 +5,25 @@ ENV PGID=1000 PUID=1000
 WORKDIR /mopidy-iris
 
 RUN \
-  echo "* Installing Runtime Packages" \
-    && echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk upgrade --update \
+  echo "* Updating Package Repositories" \
+    && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
+    && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
+    && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
+    && apk upgrade --no-cache \
+    && pip install --upgrade pip \
+  && echo "* Installing Runtime Packages" \
     && apk add --no-cache \
-      libvpx \
       libcdio \
+      libcaca \
+      libvpx@edge \
       libffi-dev \
-      gst-plugins-good@commuedge \
-      gst-plugins-ugly@commuedge \
-      py2-gst \
+      openssl-dev \
+      v4l-utils-libs@edge \
+      py2-gst@edge \
       su-exec \
-      tini@commuedge \
+      tini@edge \
+      gst-plugins-good@edge \
+      gst-plugins-ugly@edge \
     && pip install -U \
       pyopenssl \
       youtube-dl \
@@ -24,7 +31,6 @@ RUN \
     && pip install -U \
       Mopidy \
       Mopidy-SoundCloud \
-      Mopidy-Spotify \
       Mopidy-YouTube \
       Mopidy-Local-Images \
       Mopidy-Local-SQLite \
@@ -32,17 +38,18 @@ RUN \
     && pip install -U Mopidy-Iris \
   && echo "* Creating Mopidy User" \
     && addgroup -g ${PGID} mopidy \
-    && adduser -h /mopidy -s /bin/sh -D -G sudo,mopidy -u ${PUID} mopidy \
+    && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
   && echo "* Fixing privileges" \
+    && mkdir -p /data \
     && chown -R mopidy:mopidy /data \
   && echo "* Ready to start Mopidy" \
   && sleep 10
 
-USER   mopidy
 COPY   mopidy.conf /config/mopidy.conf
 COPY   run.sh /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/run.sh
 EXPOSE 6600 6680 5555/udp
+USER   mopidy
 VOLUME ["/music", "/data"]
 
 LABEL description "Open source media server"
