@@ -30,11 +30,18 @@ RUN \
   && echo "* Installing Mopidy + Extensions" \
     && pip install -U \
       Mopidy \
-      Mopidy-Iris \
       Mopidy-SoundCloud \
       Mopidy-YouTube \
       Mopidy-Local-Images \
       Mopidy-Local-SQLite \
+  && echo "* Installing Iris" \
+    && pip install -U Mopidy-Iris \
+  && echo "* Creating Mopidy User" \
+    && addgroup -g ${PGID} mopidy \
+    && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
+  && echo "* Fixing privileges" \
+    && mkdir -p /data \
+    && chown -R mopidy:mopidy /data \
   && echo "* Ready to start Mopidy" \
   && sleep 10
 
@@ -46,4 +53,4 @@ VOLUME ["/music", "/data"]
 
 LABEL description "Open source media server"
 
-CMD ["/sbin/tini", "--", "mopidy --config '/data/config/mopidy.conf'"]
+CMD ["run.sh"]

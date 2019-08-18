@@ -1,9 +1,10 @@
 #!/bin/sh
+
 function stop() {
-  kill $PID
+    kill $PID
 }
 
 trap stop HUP INT TERM
-su-exec mopidy mopidy --config "/data/config/mopidy.conf" "${@}" &
+su-exec mopidy mopidy --config "${MOPIDY_CONFIG_FILE}" "${@}" &
 PID=$!
 wait $PID
