@@ -6,16 +6,16 @@ WORKDIR /mopidy-iris
 
 RUN \
   echo "* Installing Runtime Packages" \
-    && echo "@edge https://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "@commuedge https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk upgrade --update \
     && apk add --no-cache \
-      libvpx@edge \
-      libcdio@edge \
-      libffi@edge \
-      gst-plugins-good@commuedge \
-      gst-plugins-ugly@commuedge \
-      py2-gst@commuedge \
-      su-exec@edge \
+      libvpx \
+      libcdio \
+      libffi-dev \
+      gst-plugins-good \
+      gst-plugins-ugly \
+      py2-gst \
+      su-exec \
       tini@commuedge \
     && pip install -U \
       pyopenssl \
