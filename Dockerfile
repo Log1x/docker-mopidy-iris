@@ -41,14 +41,15 @@ RUN \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
   && echo "* Fixing privileges" \
     && mkdir -p /data/.config /data/.cache \
+    && chown -R mopidy:mopidy /data
   && echo "* Cleaning up" \
     && rm -f /var/cache/apk/* \
   && echo "* Ready to start Mopidy" \
-  && sleep 1
+  && sleep 10
 
 COPY   root/ /
+RUN    mv /data/.config/mopidy.conf.default /data/.config/mopidy.conf
 RUN    chmod +x /usr/local/bin/run.sh
-RUN    chown -R mopidy:mopidy /data
 EXPOSE 6600 6680 5555/udp
 VOLUME /data /music /playlists
 
