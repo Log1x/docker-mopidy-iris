@@ -45,11 +45,12 @@ RUN \
   && echo "* Ready to start Mopidy" \
   && sleep 1
 
+EXPOSE 6600 6680 5555/UDP
+VOLUME /data /music
+
 COPY   mopidy.conf /data/.config/mopidy.conf
 COPY   run.sh /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/run.sh
-EXPOSE 6600 6680 5555/udp
-VOLUME ["/music", "/data"]
 
 LABEL description "Open source media server"
 
