@@ -12,8 +12,8 @@ RUN \
       libvpx \
       libcdio \
       libffi-dev \
-      gst-plugins-good \
-      gst-plugins-ugly \
+      gst-plugins-good@commuedge \
+      gst-plugins-ugly@commuedge \
       py2-gst \
       su-exec \
       tini@commuedge \
