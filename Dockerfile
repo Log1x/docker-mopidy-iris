@@ -48,9 +48,8 @@ RUN \
 EXPOSE 6600 6680 5555/UDP
 VOLUME /data /music
 
-COPY   mopidy.conf /data/.config/mopidy.conf
-COPY   run.sh /usr/local/bin/run.sh
-RUN    chmod +x /usr/local/bin/run.sh
+COPY root/ /
+RUN  chmod +x /usr/local/bin/run.sh
 
 LABEL description "Open source media server"
 
