@@ -48,7 +48,6 @@ RUN \
   && sleep 10
 
 COPY   root/ /
-RUN    mv /data/.config/mopidy.conf.default /data/.config/mopidy.conf
 RUN    chmod +x /usr/local/bin/run.sh
 EXPOSE 6600 6680 5555/udp
 VOLUME /data /music /playlists

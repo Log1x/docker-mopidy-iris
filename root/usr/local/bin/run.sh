@@ -1,5 +1,7 @@
 #!/bin/sh
 
+[[ ! -f /data/.config/mopidy.conf ]] && cp /defaults/mopidy.conf /data/.config/mopidy.conf
+
 function stop() {
     kill $PID
 }
