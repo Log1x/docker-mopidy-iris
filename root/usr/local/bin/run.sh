@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ ! -f /data/.config/mopidy.conf ]; then
+if [ ! -r /data/.config/mopidy.conf ]; then
   mkdir -p /data/.config && cp /defaults/mopidy.conf /data/.config
 fi
 

@@ -25,6 +25,7 @@ RUN \
       py-gobject@edge \
       su-exec@edge \
       gstreamer@edge \
+      gst-plugins-base@edge \
       gst-plugins-good@edge \
       gst-plugins-ugly@edge \
     && pip install -U \
@@ -39,7 +40,7 @@ RUN \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
   && echo "* Fixing privileges" \
-    && mkdir -p /data/.config /data/.cache \
+    && mkdir -p /data/{.config,.cache} \
     && chown -R mopidy:mopidy /data \
   && echo "* Cleaning up" \
     && rm -f /var/cache/apk/* \
