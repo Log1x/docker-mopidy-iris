@@ -1,9 +1,6 @@
 FROM jfloff/alpine-python:2.7
-MAINTAINER Log1x <github@log1x.com>
 
-ENV PUID="${PUID:-1000}"
-ENV PGID="${PGID:-1000}"
-
+ENV PUID="${PUID:-1000}" PGID="${PGID:-1000}"
 ENV PYTHONPATH="/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
 
 WORKDIR /mopidy
@@ -16,16 +13,18 @@ RUN \
     && apk upgrade --no-cache \
     && pip install --upgrade pip \
   && echo "* Installing Runtime Packages" \
-    && apk add --no-cache \
+    && apk add -U --no-cache \
       libcdio \
       libcaca \
       libvpx@edge \
       libffi-dev \
       openssl-dev \
       v4l-utils-libs@edge \
+      python2-dev@edge \
       py2-gst@edge \
       py-gobject@edge \
-      su-exec \
+      su-exec@edge \
+      gstreamer@edge \
       gst-plugins-good@edge \
       gst-plugins-ugly@edge \
     && pip install -U \
@@ -40,12 +39,12 @@ RUN \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
   && echo "* Fixing privileges" \
-    && mkdir -p /data \
+    && mkdir -p /data/.config /data/.cache \
     && chown -R mopidy:mopidy /data \
   && echo "* Cleaning up" \
     && rm -f /var/cache/apk/* \
   && echo "* Ready to start Mopidy" \
-  && sleep 10
+  && sleep 1
 
 COPY   root/ /
 RUN    chmod +x /usr/local/bin/run.sh
