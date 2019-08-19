@@ -1,45 +1,52 @@
 FROM jfloff/alpine-python:2.7
 
-ENV PUID="${PUID:-1000}" PGID="${PGID:-1000}"
+ENV PUID="${PUID:-1000}"
+ENV PGID="${PGID:-1000}"
 ENV PYTHONPATH="/usr/local/lib/python2.7/site-packages:/usr/lib/python2.7/site-packages"
 
 WORKDIR /mopidy
 
 RUN \
   echo "* Updating Package Repositories" \
-    && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
+    && echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
+    && echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
+    && echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
     && apk upgrade --no-cache \
     && pip install --upgrade pip \
   && echo "* Installing Runtime Packages" \
     && apk add -U --no-cache \
       libcdio \
       libcaca \
-      libvpx@edge \
+      libxml2-dev \
+      libxslt-dev \
+      libvpx \
       libffi-dev \
       openssl-dev \
-      v4l-utils-libs@edge \
-      python2-dev@edge \
-      py2-gst@edge \
-      py-gobject@edge \
-      su-exec@edge \
-      gstreamer@edge \
-      gst-plugins-base@edge \
-      gst-plugins-good@edge \
-      gst-plugins-ugly@edge \
+      v4l-utils-libs \
+      python2-dev \
+      py2-crypto \
+      py2-gst \
+      py-gobject \
+      su-exec \
+      gstreamer \
+      gst-plugins-base \
+      gst-plugins-good \
+      gst-plugins-ugly \
     && pip install -U \
       pyopenssl \
+      youtube-dl \
   && echo "* Installing Mopidy + Extensions" \
     && pip install -U \
       Mopidy \
       Mopidy-Iris \
+      Mopidy-SoundCloud \
+      Mopidy-GMusic \
       Mopidy-Local-Images \
       Mopidy-Local-SQLite \
   && echo "* Creating Mopidy User" \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
-  && echo "* Fixing privileges" \
+  && echo "* Fixing Privileges" \
     && mkdir -p /data/{.config,.cache} \
     && chown -R mopidy:mopidy /data \
   && echo "* Cleaning up" \
