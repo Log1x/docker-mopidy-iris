@@ -46,9 +46,6 @@ RUN \
   && echo "* Creating Mopidy User" \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
-  && echo "* Fixing Privileges" \
-    && mkdir -p /data/{.config,.cache} \
-    && chown -R mopidy:mopidy /data \
   && echo "* Cleaning up" \
     && rm -f /var/cache/apk/* \
   && echo "* Ready to start Mopidy" \
