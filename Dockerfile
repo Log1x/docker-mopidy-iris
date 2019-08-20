@@ -28,6 +28,7 @@ RUN \
       py2-gst \
       py-gobject \
       su-exec \
+      icecast \
       gstreamer \
       gst-plugins-base \
       gst-plugins-good \
@@ -53,7 +54,7 @@ RUN \
 
 COPY   root/ /
 RUN    chmod +x /usr/local/bin/run.sh
-EXPOSE 6600 6680 5555/udp
+EXPOSE 6600 6680 8000 5555/udp
 VOLUME /data /music /playlists
 
 LABEL description "Open source media server"
