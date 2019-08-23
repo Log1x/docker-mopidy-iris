@@ -27,6 +27,7 @@ RUN \
       py2-crypto \
       py2-gst \
       py-gobject \
+      mailcap \
       su-exec \
       icecast \
       gstreamer \
