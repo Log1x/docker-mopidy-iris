@@ -1,0 +1,41 @@
+<icecast>
+  <hostname>icecast.local</hostname>
+  <location>local</location>
+  <admin>noreply@icecast.local</admin>
+  <fileserve>1</fileserve>
+
+  <limits>
+    <burst-on-connect>0</burst-on-connect>
+  </limits>
+
+  <authentication>
+    <source-password>hackme</source-password>
+    <relay-password>hackme</relay-password>
+    <admin-user>admin</admin-user>
+    <admin-password>hackme</admin-password>
+  </authentication>
+
+  <listen-socket>
+    <port>8000</port>
+    <bind-address>0.0.0.0</bind-address>
+  </listen-socket>
+
+  <mount>
+    <mount-name>/mopidy</mount-name>
+    <fallback-mount>/silence.mp3</fallback-mount>
+    <fallback-override>1</fallback-override>
+  </mount>
+
+  <paths>
+    <logdir>/data/icecast/logs</logdir>
+    <webroot>/data/icecast/web</webroot>
+    <adminroot>/data/icecast/admin</adminroot>
+
+    <alias source="/" destination="/status.xsl"/>
+  </paths>
+
+  <logging>
+    <loglevel>3</loglevel>
+    <logsize>10000</logsize>
+  </logging>
+</icecast>

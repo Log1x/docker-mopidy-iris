@@ -16,20 +16,22 @@ RUN \
   && echo "* Installing Runtime Packages" \
     && apk add -U --no-cache \
       coreutils \
-      libcdio \
-      libcaca \
+      su-exec \
       libxml2-dev \
       libxslt-dev \
-      libvpx \
       libffi-dev \
       openssl-dev \
-      v4l-utils-libs \
       python2-dev \
+      libcdio \
+      libcaca \
+      libvpx \
+      v4l-utils-libs \
       py2-crypto \
       py2-gst \
       py-gobject \
       mailcap \
-      su-exec \
+      icecast \
+      snapcast-server \
       gstreamer \
       gst-plugins-base \
       gst-plugins-good \
@@ -52,7 +54,14 @@ RUN \
   && echo "* Creating Mopidy User" \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
+    && echo "mopidy ALL=NOPASSWD: /usr/local/lib/pyenv/versions/2.7.16/lib/python2.7/site-packages/mopidy_iris/system.sh" >> /etc/sudoers \
   && echo "* Cleaning up" \
+  && apk --purge del \
+      libxml2-dev \
+      libxslt-dev \
+      libffi-dev \
+      openssl-dev \
+      python2-dev \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/* \
   && echo "* Ready to start Mopidy" \
@@ -61,7 +70,7 @@ RUN \
 COPY   root/ /
 RUN    chmod +x /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/entrypoint.sh
-EXPOSE 6600 6680 8000 5555/udp
+EXPOSE 6600 6680 8000 1704 1705
 VOLUME /data /music /playlists
 
 LABEL description "Open source media server"
