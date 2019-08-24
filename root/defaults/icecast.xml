@@ -43,12 +43,4 @@
     <adminroot>/usr/share/icecast/admin</adminroot>
     <alias source="/" dest="/status.xsl"/>
   </paths>
-
-  <security>
-    <chroot>0</chroot>
-    <changeowner>
-      <user>mopidy</user>
-      <group>mopidy</group>
-    </changeowner>
-  </security>
 </icecast>
