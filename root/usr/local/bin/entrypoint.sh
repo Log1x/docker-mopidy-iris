@@ -13,9 +13,14 @@ if [ ! -r /data/.config/icecast.xml ]; then
 fi
 
 if [ ! -r /data/icecast ]; then
-    mkdir -p /data/icecast/logs
+    mkdir -p /data/icecast/web /data/icecast/logs /data/icecast/admin
     cp -r /usr/share/icecast /data/icecast
     cp /defaults/silence.mp3 /data/icecast/web/silence.mp3
+fi
+
+if [ ! -r /tmp/snapfifo ]; then
+    touch /tmp/snapfifo
+    chown mopidy:mopidy /tmp/snapfifo
 fi
 
 chown -R mopidy:mopidy /data
