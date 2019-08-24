@@ -15,6 +15,7 @@ RUN \
     && pip install --upgrade pip \
   && echo "* Installing Runtime Packages" \
     && apk add -U --no-cache \
+      coreutils \
       libcdio \
       libcaca \
       libxml2-dev \
@@ -37,10 +38,14 @@ RUN \
     && pip install -U \
       pyopenssl \
       youtube-dl \
+      pyasn1 \
+    && wget -c https://mopidy.github.io/libspotify-archive/libspotify-12.1.51-Linux-x86_64-release.tar.gz -O - | tar -xzC /tmp \
+      && make install -C /tmp/libspotify-12.1.51-Linux-x86_64-release prefix=/usr/local || true \
   && echo "* Installing Mopidy + Extensions" \
     && pip install -U \
       Mopidy \
       Mopidy-Iris \
+      Mopidy-Spotify-Web \
       Mopidy-SoundCloud \
       Mopidy-GMusic \
       Mopidy-Local-Images \
@@ -49,7 +54,8 @@ RUN \
     && addgroup -g ${PGID} mopidy \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
   && echo "* Cleaning up" \
-    && rm -f /var/cache/apk/* \
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /tmp/* \
   && echo "* Ready to start Mopidy" \
   && sleep 1
 
