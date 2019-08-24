@@ -20,13 +20,14 @@
     <admin-password>3ds6ksvNGm6WeccXrd</admin-password>
   </authentication>
 
-  <hostname>localhost</hostname>
+  <hostname>music.log1x.cloud</hostname>
   <location>Central, USA</location>
-  <admin>noreply@music.log1x.cloud</admin>
+  <admin>noreply@log1x.cloud</admin>
+  <fileserve>1</fileserve>
 
   <listen-socket>
     <port>8000</port>
-    <bind-address>127.0.0.1</bind-address>
+    <bind-address>0.0.0.0</bind-address>
   </listen-socket>
 
   <mount>
@@ -35,14 +36,11 @@
     <fallback-override>1</fallback-override>
   </mount>
 
-  <fileserve>1</fileserve>
-
   <paths>
     <basedir>/data/.config/icecast2</basedir>
     <logdir>/data/logs/icecast2</logdir>
     <webroot>/data/.config/icecast2/web</webroot>
     <adminroot>/data/.config/icecast2/admin</adminroot>
-
     <alias source="/" dest="/status.xsl"/>
   </paths>
 
