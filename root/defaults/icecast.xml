@@ -1,24 +1,33 @@
 <icecast>
-  <hostname>icecast.local</hostname>
-  <location>local</location>
+  <hostname>localhost</hostname>
+  <location>docker</location>
   <admin>noreply@icecast.local</admin>
   <fileserve>1</fileserve>
 
   <limits>
-    <burst-on-connect>0</burst-on-connect>
+    <clients>5</clients>
+    <sources>2</sources>
+    <queue-size>1280000</queue-size>
+    <client-timeout>30</client-timeout>
+    <header-timeout>15</header-timeout>
+    <source-timeout>1</source-timeout>
+    <burst-on-connect>1</burst-on-connect>
+    <burst-size>65535</burst-size>
   </limits>
 
   <authentication>
     <source-password>hackme</source-password>
     <relay-password>hackme</relay-password>
-    <admin-user>admin</admin-user>
     <admin-password>hackme</admin-password>
   </authentication>
 
   <listen-socket>
     <port>8000</port>
-    <bind-address>0.0.0.0</bind-address>
   </listen-socket>
+
+  <http-headers>
+    <header name="Access-Control-Allow-Origin" value="*" />
+  </http-headers>
 
   <mount>
     <mount-name>/mopidy</mount-name>
@@ -27,11 +36,12 @@
   </mount>
 
   <paths>
+    <basedir>/data/icecast</basedir>
     <logdir>/data/icecast/logs</logdir>
     <webroot>/data/icecast/web</webroot>
     <adminroot>/data/icecast/admin</adminroot>
 
-    <alias source="/" destination="/status.xsl"/>
+    <alias source="/" destination="/mopidy"/>
   </paths>
 
   <logging>

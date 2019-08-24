@@ -8,9 +8,8 @@ WORKDIR /mopidy
 
 RUN \
   echo "* Updating Package Repositories" \
-    && echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories \
-    && echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories \
-    && echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
+    && echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/main' >> /etc/apk/repositories \
+    && echo 'http://dl-cdn.alpinelinux.org/alpine/v3.9/community' >> /etc/apk/repositories \
     && apk upgrade --no-cache \
     && pip install --upgrade pip \
   && echo "* Installing Runtime Packages" \
@@ -31,8 +30,8 @@ RUN \
       py-gobject \
       mailcap \
       icecast \
-      snapcast-server \
       gstreamer \
+      gstreamer-tools \
       gst-plugins-base \
       gst-plugins-good \
       gst-plugins-ugly \
@@ -56,12 +55,6 @@ RUN \
     && adduser -h /mopidy -s /bin/sh -D -G mopidy -u ${PUID} mopidy \
     && echo "mopidy ALL=NOPASSWD: /usr/local/lib/pyenv/versions/2.7.16/lib/python2.7/site-packages/mopidy_iris/system.sh" >> /etc/sudoers \
   && echo "* Cleaning up" \
-  && apk --purge del \
-      libxml2-dev \
-      libxslt-dev \
-      libffi-dev \
-      openssl-dev \
-      python2-dev \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/* \
   && echo "* Ready to start Mopidy" \
@@ -70,8 +63,8 @@ RUN \
 COPY   root/ /
 RUN    chmod +x /usr/local/bin/run.sh
 RUN    chmod +x /usr/local/bin/entrypoint.sh
-EXPOSE 1704 1705 6600 6680 8000
-VOLUME /data /music /playlists
+EXPOSE 6600 6680 8000
+VOLUME /data /music
 
 LABEL description "Open source media server"
 

@@ -13,10 +13,9 @@ $ docker run -d \
   --name=<container name> \
   -p 6600:6600 \
   -p 6680:6680 \
-  -p 5555:5555/udp \
+  -p 8000:8000 \
   -v <path for data files>:/data \
   -v <path for music files>:/music \
-  -v <path for playlist files>:/playlists \
   log1x/mopidy-iris
 ```
 
