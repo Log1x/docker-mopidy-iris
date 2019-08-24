@@ -30,7 +30,6 @@ RUN \
       py-gobject \
       mailcap \
       su-exec \
-      icecast \
       gstreamer \
       gst-plugins-base \
       gst-plugins-good \
