@@ -54,7 +54,8 @@ RUN \
   && sleep 1
 
 COPY   root/ /
-RUN    chmod +x /usr/local/bin/{run,entrypoint}.sh
+RUN    chmod +x /usr/local/bin/run.sh
+RUN    chmod +x /usr/local/bin/entrypoint.sh
 EXPOSE 6600 6680 8000 5555/udp
 VOLUME /data /music /playlists
 
