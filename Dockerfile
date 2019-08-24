@@ -54,10 +54,11 @@ RUN \
   && sleep 1
 
 COPY   root/ /
-RUN    chmod +x /usr/local/bin/run.sh
+RUN    chmod +x /usr/local/bin/{run,entrypoint}.sh
 EXPOSE 6600 6680 8000 5555/udp
 VOLUME /data /music /playlists
 
 LABEL description "Open source media server"
 
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["run.sh"]

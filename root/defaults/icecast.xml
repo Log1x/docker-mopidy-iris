@@ -20,9 +20,9 @@
     <admin-password>3ds6ksvNGm6WeccXrd</admin-password>
   </authentication>
 
-  <hostname>music.log1x.cloud</hostname>
-  <location>Central, USA</location>
-  <admin>noreply@log1x.cloud</admin>
+  <hostname>icecast.local</hostname>
+  <location>unknown</location>
+  <admin>noreply@icecast.local</admin>
   <fileserve>1</fileserve>
 
   <listen-socket>
@@ -36,22 +36,19 @@
     <fallback-override>1</fallback-override>
   </mount>
 
-  <paths>
-    <basedir>/data/.config/icecast2</basedir>
-    <logdir>/data/logs/icecast2</logdir>
-    <webroot>/data/.config/icecast2/web</webroot>
-    <adminroot>/data/.config/icecast2/admin</adminroot>
+<paths>
+    <basedir>/usr/share/icecast</basedir>
+    <logdir>/data/logs/icecast</logdir>
+    <webroot>/usr/share/icecast/web</webroot>
+    <adminroot>/usr/share/icecast/admin</adminroot>
     <alias source="/" dest="/status.xsl"/>
   </paths>
 
-  <logging>
-    <accesslog>access.log</accesslog>
-    <errorlog>error.log</errorlog>
-    <loglevel>3</loglevel>
-    <logsize>10000</logsize>
-  </logging>
-
   <security>
     <chroot>0</chroot>
+    <changeowner>
+      <user>mopidy</user>
+      <group>mopidy</group>
+    </changeowner>
   </security>
 </icecast>
